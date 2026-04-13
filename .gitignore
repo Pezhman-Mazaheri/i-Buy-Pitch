@@ -1,0 +1,14 @@
+# Python HTTP server
+*.pyc
+__pycache__/
+
+# PDF working files
+pdf_images/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dev tools
+*.log
+node_modules/
