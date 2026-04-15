@@ -482,6 +482,42 @@
     .proof-lbl { font-size: 0.82rem; color: var(--muted); line-height: 1.5; font-weight: 500; }
     .proof-src { font-size: 0.7rem; color: rgba(122,150,176,0.5); margin-top: 8px; font-style: italic; }
 
+    /* ── DASHBOARD GALLERY ── */
+    .dash-tabs {
+      display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px;
+    }
+    .dash-tab {
+      padding: 8px 20px; border-radius: 50px;
+      font-size: 0.78rem; font-weight: 600; cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--glass); color: var(--muted);
+      transition: all 0.2s;
+    }
+    .dash-tab.active, .dash-tab:hover {
+      background: rgba(0,201,167,0.12);
+      border-color: rgba(0,201,167,0.4);
+      color: var(--teal);
+    }
+    .dash-screens { position: relative; }
+    .dash-screen { display: none; }
+    .dash-screen.active { display: block; }
+    .dash-caption {
+      margin-top: 16px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .dash-feat {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 16px;
+      background: var(--glass); border: 1px solid var(--border);
+      border-radius: var(--r);
+    }
+    .dash-feat-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .dash-feat strong { display: block; font-size: 0.84rem; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+    .dash-feat span   { font-size: 0.77rem; color: var(--muted); line-height: 1.5; }
+    @media (max-width: 960px) {
+      .dash-caption { grid-template-columns: 1fr; }
+    }
+
     /* ── FULL IMAGE SECTION ── */
     .full-img { max-width: 1160px; margin: 0 auto; padding: 0 56px 100px; }
     .full-img .frame img { width: 100%; }
@@ -593,6 +629,7 @@
     <li><a href="#pipeline">AI Agents</a></li>
     <li><a href="#marketplace">Marketplace</a></li>
     <li><a href="#results">Results</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
     <li><a href="#apps">Live Apps</a></li>
   </ul>
   <div class="nav-apps">
@@ -1113,6 +1150,168 @@
 <div class="divider"></div>
 
 <!-- ══════════════════════════════════════════
+     ADMIN DASHBOARD
+═══════════════════════════════════════════ -->
+<div class="sec" id="dashboard">
+
+  <!-- Header -->
+  <div class="reveal">
+    <div class="sec-eyebrow">New Feature</div>
+    <h2 class="sec-title">Real-Time Business Intelligence<br/>Built Right Into i-Stock</h2>
+    <p class="sec-desc" style="max-width:680px;">
+      The Admin Dashboard turns your live Firestore data into instant insight —
+      inventory value, sales revenue, category breakdown with 4-level drill-down,
+      and product performance — all in one place, always up to date.
+    </p>
+  </div>
+
+  <!-- KPI strip -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:40px 0 48px;" class="reveal d1">
+    <div class="proof-card" style="text-align:center;">
+      <div style="font-size:2rem;font-weight:800;font-family:'Space Grotesk',sans-serif;color:var(--teal);">35</div>
+      <div class="proof-lbl">Active Products<br/>across 5 stores</div>
+    </div>
+    <div class="proof-card" style="text-align:center;">
+      <div style="font-size:2rem;font-weight:800;font-family:'Space Grotesk',sans-serif;color:var(--gold);">€1 920</div>
+      <div class="proof-lbl">Total Inventory<br/>Value (listed)</div>
+    </div>
+    <div class="proof-card" style="text-align:center;">
+      <div style="font-size:2rem;font-weight:800;font-family:'Space Grotesk',sans-serif;color:var(--accent);">75</div>
+      <div class="proof-lbl">Items Sold<br/>€2 556 revenue</div>
+    </div>
+    <div class="proof-card" style="text-align:center;">
+      <div style="font-size:2rem;font-weight:800;font-family:'Space Grotesk',sans-serif;color:#a78bfa;">4</div>
+      <div class="proof-lbl">Category Drill-Down<br/>Levels</div>
+    </div>
+  </div>
+
+  <!-- Tab navigation -->
+  <div class="dash-tabs reveal d2">
+    <button class="dash-tab active" onclick="showDash(0)" id="dtab-0">📊 Overview</button>
+    <button class="dash-tab" onclick="showDash(1)" id="dtab-1">📦 Inventory Analytics</button>
+    <button class="dash-tab" onclick="showDash(2)" id="dtab-2">📋 Products List</button>
+    <button class="dash-tab" onclick="showDash(3)" id="dtab-3">💰 Sales Analytics</button>
+  </div>
+
+  <!-- Tab screens -->
+  <div class="dash-screens reveal d3">
+
+    <!-- SCREEN 0: Entry + Overview -->
+    <div class="dash-screen active" id="dscreen-0">
+      <div style="display:grid;grid-template-columns:1fr 1.6fr;gap:16px;">
+        <div class="frame">
+          <div class="frame-tag">i-Stock App — Admin Entry</div>
+          <img src="D1.png" alt="i-Stock app navigation bar highlighting the Admin Dashboard button between My Products and Store dropdowns" />
+        </div>
+        <div class="frame">
+          <div class="frame-tag">i-BI Admin — Overview</div>
+          <img src="D2.png" alt="Overview dashboard: 35 total products, €1,920 inventory value, €53.86 avg price, 5 active stores. Sales: 75 items sold, €2,556 revenue. Inventory by Category bar chart (Electronics 14, Home & Living 9, Fashion 6...). Product Status donut (97% Second hand). Inventory Value by Store and Products Added per Month charts." />
+        </div>
+      </div>
+      <div class="dash-caption">
+        <div class="dash-feat">
+          <span class="dash-feat-icon">📊</span>
+          <div><strong>Live KPI Overview</strong><span>Total products, inventory value, items sold and revenue — live from Firestore in real time</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🏪</span>
+          <div><strong>Multi-Store View</strong><span>Aggregate or filter by store — compare performance across all Vaasa locations simultaneously</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🍩</span>
+          <div><strong>Product Status Breakdown</strong><span>Donut chart splitting Second-hand vs New inventory — instant quality mix visibility</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">📅</span>
+          <div><strong>Monthly Trend</strong><span>Products Added per Month bar chart reveals intake velocity and seasonal patterns</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 1: Inventory Analytics -->
+    <div class="dash-screen" id="dscreen-1">
+      <div class="frame">
+        <div class="frame-tag">i-BI Admin — Inventory Analytics</div>
+        <img src="D3.png" alt="Inventory Analytics page showing Category Breakdown horizontal bar chart (Electronics & Technology 14 items €1239, Home & Living 9 items €129, Fashion & Apparel 6 items €102...) and All Top-Level Categories table with Products count, Value in €, and Share bar per category. Drill-down arrow icons on each row." />
+      </div>
+      <div class="dash-caption">
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🔍</span>
+          <div><strong>4-Level Category Drill-Down</strong><span>Click any category bar to drill into sub-categories — all the way to the deepest taxonomy level (Layer 4)</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">💶</span>
+          <div><strong>Value per Category</strong><span>See both item count and €EUR value for every category — identifies your highest-value inventory segments</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">📈</span>
+          <div><strong>Share Visualization</strong><span>Proportional bar charts show each category's share of total inventory at a glance</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🎯</span>
+          <div><strong>Powered by AI Taxonomy</strong><span>Drill-down is only possible because i-Stock's AI agents assign precise hierarchical categories automatically at intake</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 2: Products List -->
+    <div class="dash-screen" id="dscreen-2">
+      <div class="frame">
+        <div class="frame-tag">i-BI Admin — Products</div>
+        <img src="D4.png" alt="Products list showing 35 of 35 products with columns: Photo thumbnail, Title (AI-generated), Category, Store, Price in €, Status (New or Second hand badge), and Added date. Products include Women's Classic Black Tall Riding Boots, Light Wood Computer Desk, Moomin Mug, Men's Jacket, Phil&Teds Vibe Double Stroller and others." />
+      </div>
+      <div class="dash-caption">
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🖼️</span>
+          <div><strong>Studio Photos in the List</strong><span>Every product shows its AI-generated studio thumbnail — clean white background, instantly recognizable</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🔍</span>
+          <div><strong>Search & Filter</strong><span>Full-text search by title, code or tags combined with category and status filters for instant lookup</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🏷️</span>
+          <div><strong>AI-Generated Titles</strong><span>Every product name written by the LLM agent — SEO-optimized, descriptive, zero manual typing</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">📆</span>
+          <div><strong>Full Audit Trail</strong><span>Date Added column tracks exactly when each item entered the system — complete intake history</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCREEN 3: Sales Analytics -->
+    <div class="dash-screen" id="dscreen-3">
+      <div class="frame">
+        <div class="frame-tag">i-BI Admin — Sales Analytics</div>
+        <img src="D5.png" alt="Sales Analytics: 75 items sold, €2,556 total revenue, €34.08 avg sale price, 12 batches. Toggle between Revenue (€) and Items Sold views. Sales by Store bar chart (Unknown €2,416 / 61 items, Vaasa_Minimossen €140 / 14 items). Sales by Category with drill-down (Automotive & Tools €1,296, Home & Living €300, Electronics €140, Fashion €120). Sales Timeline and Revenue Share donut chart." />
+      </div>
+      <div class="dash-caption">
+        <div class="dash-feat">
+          <span class="dash-feat-icon">💰</span>
+          <div><strong>Revenue by Category</strong><span>See which product categories generate the most revenue — toggle between € value and units sold</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🔍</span>
+          <div><strong>Drill-Down Sales</strong><span>Click any category bar to drill into sub-categories — identify your best-selling sub-niches</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">🍧</span>
+          <div><strong>Revenue Share Donut</strong><span>Visual breakdown of revenue contribution per category — Automotive & Tools 70%, Home & Living 16%, Electronics 8%</span></div>
+        </div>
+        <div class="dash-feat">
+          <span class="dash-feat-icon">📅</span>
+          <div><strong>Sales Timeline</strong><span>Month-by-month sales trend lets managers spot peaks, plan purchasing and optimize staffing</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /dash-screens -->
+</div><!-- /sec#dashboard -->
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
      MARKET OPPORTUNITY
 ═══════════════════════════════════════════ -->
 <div class="sec" id="market">
@@ -1266,6 +1465,17 @@
       ? 'rgba(13,27,42,0.97)'
       : 'rgba(13,27,42,0.82)';
   });
+
+  // Dashboard tab switcher
+  function showDash(index) {
+    const total = 4;
+    for (let i = 0; i < total; i++) {
+      const tab = document.getElementById('dtab-' + i);
+      const screen = document.getElementById('dscreen-' + i);
+      if (tab) tab.classList.toggle('active', i === index);
+      if (screen) screen.classList.toggle('active', i === index);
+    }
+  }
 </script>
 </body>
 </html>
